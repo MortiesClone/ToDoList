@@ -1,16 +1,9 @@
-<?php 
-    $server     = "localhost";
-    $user       = "root";
-    $password   = "";
-    $db_name    = "list_data";
-
-    $db_connect = mysql_connect($server, $user, $password);
-    if(!$db_connect){
-        echo '<p id="eror">Database eror</p>';
-    }
-    mysql_select_db($db_name);
-    $sql = mysql_query("SELECT * FROM `list`");
+<?php
+    include 'database.php';
+    $database = new Database();
+    $result = $database->get_data("SELECT * FROM `list`", 'get_all');
 ?>
+
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -21,8 +14,9 @@
         <input type="checkbox" id="check">
         <input type="button" onclick="send();" value="OK">
         <div id="content">
-        <?php while($row=mysql_fetch_array($sql)):?>
-            <p><?=$row['id']?>. <?=$row['text']?> <input type="checkbox" 
+        <?php while($row=mysql_fetch_array($result)):?>
+            <p><?=$row['id']?>. <?=$row['text']?> 
+            <input type="checkbox" 
             <?php if($row['done'] == true):?>
                     <?='checked'?>
             <?endif?>></p>
@@ -30,19 +24,17 @@
         </div>
         <script>
             function send(){
-                var text = "text=" + $("#text").val() + "&done=" + $("#check").val();
+                var count 
+                var data = "text=" + $("#text").val() + "&done=" + $("#check").val();
                 $.ajax({
                    type: "GET",
                    url: "some.php",
-                   data: text,
+                   data: data,
                    success: function(msg){
-                       alert( "Complete!" + msg);
+                       $("#content").append('<p>' + $("#text").val() + msg + '</p>');
                    }
                  });
             }
         </script>
     </body>
 </html>
-<?php
-    mysql_close($db_connect);
-?>
