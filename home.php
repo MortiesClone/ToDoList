@@ -10,22 +10,16 @@
     }
     mysql_select_db($db_name);
     $sql = mysql_query("SELECT * FROM `list`");
-     {
-        echo ''.$Row['text'].'<br>';
-        echo ''.$Row['Done'].'<br>';
-    }
 ?>
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>ToDoList</title>
+        <script src="jquery-1.11.3.min.js"></script>
     </head>
     <body>
-        <form action="test.php">
-            <input type="text">
-            <input type="checkbox">
-            <input type="submit">
-        </form>
+        <input type="text" name="text" id="text">
+        <input type="checkbox" id="check">
+        <input type="button" onclick="send();" value="OK">
         <div id="content">
         <?php while($row=mysql_fetch_array($sql)):?>
             <p><?=$row['id']?>. <?=$row['text']?> <input type="checkbox" 
@@ -35,7 +29,17 @@
         <?php endwhile?>
         </div>
         <script>
-            
+            function send(){
+                var text = "text=" + $("#text").val() + "&done=" + $("#check").val();
+                $.ajax({
+                   type: "GET",
+                   url: "some.php",
+                   data: text,
+                   success: function(msg){
+                       alert( "Complete!" + msg);
+                   }
+                 });
+            }
         </script>
     </body>
 </html>
