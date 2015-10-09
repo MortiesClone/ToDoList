@@ -25,19 +25,5 @@
             <?endif?>></p>
         <?php endwhile?>
         </div>
-        <script>
-            function send(){
-                var count 
-                var data = "text=" + $("#text").val();
-                $.ajax({
-                   type: "GET",
-                   url: "backend/some.php",
-                   data: data,
-                   success: function(msg){
-                       $("#content").append('<p>' + msg + '<input type="checkbox"></p>');
-                   }
-                 });
-            }
-        </script>
     </body>
 </html>
