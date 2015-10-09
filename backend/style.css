@@ -1,0 +1,31 @@
+#content {    
+    width: 30%;
+    background-color: #FFFFFF;
+    border: 1px solid #B2BDCB;
+    box-shadow: 0px 0px 10px white;
+    padding: 7px;
+    margin-top: 15px;
+    border-radius: 3px;
+}
+p {
+    padding-left: 17px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #B2BDCB;
+    color: #2B587A;
+}
+#text {
+    color: #2B587A;
+    border-radius: 3px;
+    border: 1px solid #B2BDCB;
+    padding: 3px;
+}
+#btn-ok{
+    background-color: white;
+    border: 1px solid #B2BDCB;
+    border-radius: 3px;
+    padding: 3px;
+}
+input[type="checkbox"]{
+    float: right;
+    margin-right: 7px;
+}

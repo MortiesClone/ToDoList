@@ -7,15 +7,18 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <script src="js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <input type="text" name="text" id="text">
-        <input type="checkbox" id="check">
-        <input type="button" onclick="send();" value="OK">
+        <input type="button" id="btn-ok" onclick="send();" value="OK">
         <div id="content">
         <?php while($row=mysql_fetch_array($result)):?>
-            <p><?=$row['id']?>. <?=$row['text']?> 
+            <p <?php if($row['parent'] != null):?>
+               <?='class="sub-tusk"'?>
+               <?php endif?>
+            ><?=$row['id']?>. <?=$row['text']?> 
             <input type="checkbox" 
             <?php if($row['done'] == true):?>
                     <?='checked'?>
@@ -25,13 +28,13 @@
         <script>
             function send(){
                 var count 
-                var data = "text=" + $("#text").val() + "&done=" + $("#check").val();
+                var data = "text=" + $("#text").val();
                 $.ajax({
                    type: "GET",
-                   url: "some.php",
+                   url: "backend/some.php",
                    data: data,
                    success: function(msg){
-                       $("#content").append('<p>' + $("#text").val() + msg + '</p>');
+                       $("#content").append('<p>' + msg + '<input type="checkbox"></p>');
                    }
                  });
             }
