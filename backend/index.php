@@ -1,3 +1,3 @@
 <?php 
-    include 'backend/home.php';
+    include 'home.php';
 ?>
