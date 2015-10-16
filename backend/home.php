@@ -13,7 +13,9 @@
     </head>
     <body>
         <input type="text" name="text" id="text">
-        <input type="button" id="btn-ok" onclick="send();" value="OK">
+        <input type="button" class="btn" onclick="add_textfield();" value="Добавить подзадачу">
+        <input type="button" class="btn" onclick="send();" value="Готово!">
+        <div id="inputs"></div>
         <div id="content">
         <?php while($row=mysql_fetch_array($result)):?>
             <p <?php if($row['parent'] != null):?>

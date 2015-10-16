@@ -10,3 +10,6 @@ function send(){
         }
     });
 }
+function add_textfield(){
+    $('#inputs').append('<input type=\"checkbox\">');
+}
