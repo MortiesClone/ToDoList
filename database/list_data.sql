@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 16 2015 г., 17:40
+-- Время создания: Окт 16 2015 г., 18:27
 -- Версия сервера: 5.5.45-log
 -- Версия PHP: 5.4.44
 
@@ -29,20 +29,11 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text NOT NULL,
-  `done` tinyint(1) NOT NULL,
+  `done` tinyint(1) NOT NULL DEFAULT '0',
   `parent` int(11) DEFAULT NULL,
   KEY `parent` (`parent`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Дамп данных таблицы `list`
---
-
-INSERT INTO `list` (`id`, `text`, `done`, `parent`) VALUES
-(1, 'Сделать чай', 0, NULL),
-(2, 'Купить хлеб', 0, NULL),
-(3, 'Убраться в комнате', 0, NULL);
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
