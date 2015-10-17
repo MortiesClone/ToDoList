@@ -8,13 +8,13 @@
             }
             mysql_select_db(DB_NAME);
             $result = mysql_query($sql);
-            $data = "";
+            $data = array();
             if($result == null){
-                $data .= "<p>Список пуст</p>";
+                $data = $result;
             }
             else{
                 while($row = mysql_fetch_array($result)){
-                    $data .= '<p>'.$row['text'].'</p>';
+                    $data[$row['id']] = $row['text'];
                 }
             }
             mysql_close($db_connect);

@@ -3,5 +3,12 @@
 <input type="button" class="btn" onclick="send();" value="Готово!">
 <div id="inputs"></div>
 <div id="content">
-    <?php echo $data; ?>
+    <?php
+        if($data == null)
+            echo '<p>список пуст</p>';
+        else
+            foreach($data as $value){
+                echo '<p>'.$value.'</p>';
+            }
+    ?>
 </div>
