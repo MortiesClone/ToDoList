@@ -9,6 +9,6 @@
         $model = new Model();
         $text = $_GET['text'];
         $id = $model->set_data($text, "0", "NULL");
-        echo $id.'. '.$text.' ';
+        echo json_encode(array("id" => $id, "text" => $text));
     }
 ?>

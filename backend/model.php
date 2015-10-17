@@ -27,8 +27,13 @@
                 echo '<p id="eror">Database eror</p>';
             }
             mysql_select_db(DB_NAME);
-            mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '".$done."', ".$parent.")");
-            return mysql_insert_id();
+            $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '".$done."', ".$parent.")");
+            
+            if($result == false)
+                return "Ошибка записи";
+            else
+                return mysql_insert_id();
+            
             mysql_close($db_connect);
         }
     }
