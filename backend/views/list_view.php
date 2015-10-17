@@ -8,7 +8,7 @@
             echo '<p>список пуст</p>';
         else
             foreach($data as $value){
-                echo '<p>'.$value.'</p>';
+                echo '<p>'.$value.'<input type="checkbox"></p>';
             }
     ?>
 </div>

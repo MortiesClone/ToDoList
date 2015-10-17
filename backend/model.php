@@ -1,5 +1,5 @@
 <?php
-    include 'database.php';
+    require_once 'database.php';
     class Model{
         function get_data($sql){
             $db_connect = mysql_connect(SERVER, USER, PASSWORD);
