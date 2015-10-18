@@ -1,10 +1,10 @@
 <div id="message" style="display: none;">
+    <div class="shadow"></div>
     <div class="window">
         <p>Сохранить?</p>
         <input type="button" class="btn" value="Сохранить">
         <input type="button" class="btn" value="Не сохронять">
     </div>
-    <div class="shadow"></div>
 </div>
 <div class="all">
     <input type="text" id="text" class="text">
