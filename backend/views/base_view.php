@@ -5,6 +5,7 @@
         <script src="js/script.min.js"></script>
         <link rel="stylesheet" href="css/style.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <meta charset="utf-8">
         <style>
             body{
                 width: 100%;
