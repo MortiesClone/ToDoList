@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
         <script src="js/script.min.js"></script>
         <link rel="stylesheet" href="css/style.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             #inputs{
                 width: 175px;
@@ -23,6 +23,11 @@
                 margin-right: 10px;
                 margin-top: 3px;
             }
+            .task{
+                    padding: 5px;
+                    border-bottom: 1px solid #B2BDCB;
+                    margin-top: 10px;
+            }
         </style>
     </head>
     <body>
@@ -33,6 +38,10 @@
                 $("#inputs").append("<input id=\"id" + count + "\" class=\"sub-item text\" type=\"text\">");
                 count++;
             }
+            $(".glyphicon-pencil").click(function(){
+                var text = $(this).parent("p").text();
+                $(this).parent("p").text("");
+            });
         </script>
     </body>
 </html>

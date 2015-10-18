@@ -7,8 +7,8 @@
         if($data == null)
             echo '<p>список пуст</p>';
         else
-            foreach($data as $value){
-                echo '<p>'.$value.'<span class="glyphicon glyphicon-remove remove"></span><span class="glyphicon glyphicon-pencil"></span></p>';
+            foreach($data as $key => $value){
+                echo '<div class="task" data-id="'.$key.'"><span>'.$value.'</span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span></div>';
             }
     ?>
 </div>
