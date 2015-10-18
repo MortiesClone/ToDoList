@@ -7,5 +7,10 @@
     </head>
     <body>
         <?php include $view; ?>
+        <script>
+            function add_textfield(){
+                $("#inputs").append("<input class=\"sub-item\" type=\"text\">");
+            }
+        </script>
     </body>
 </html>
