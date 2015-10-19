@@ -1,5 +1,5 @@
 <?php
-    require_once 'database.php';
+    require_once 'config.php';
     class Model{
         function get_data($sql){
             $db_connect = mysql_connect(SERVER, USER, PASSWORD);
@@ -35,6 +35,9 @@
                 return mysql_insert_id();
             
             mysql_close($db_connect);
+        }
+        function update_data(){
+                
         }
     }
 ?>

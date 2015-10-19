@@ -1,11 +1,16 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script src="js/script.min.js"></script>
-        <link rel="stylesheet" href="css/style.min.css">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
         <meta charset="utf-8">
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <?php if(FRONTEND == false):?>
+            <script src="js/script.min.js"></script>
+            <link rel="stylesheet" href="css/style.min.css">
+        <?php else:?>
+            <script src="frontend/js_result/script.js"></script>
+            <link rel="stylesheet" href="frontend/css/style.css">
+        <?php endif;?>
     </head>
     <body>
         <?php include $view; ?>
@@ -21,7 +26,7 @@
             $(".glyphicon-pencil").click(function(){
                 if(!activated){
                     span = $(this).parent().children().first();
-                    var text = span.text();
+                    text = span.text();
                     span.html("<input type=\"text\" value=\"" + text + "\">");
                     activated = true;
                 }
@@ -35,6 +40,7 @@
                         $("#message").css("display", "none");
                         span.html("" + text);
                     });
+                    activated = false;
                 }
             });
         </script>
