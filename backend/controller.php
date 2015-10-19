@@ -9,12 +9,16 @@ $application->connect_to_db();
 
     if(isset($_GET['text'])){
         $model = new Model();
-        $text = $_GET['text'];
-        $id = $model->set_data($text, "0", "NULL");
-        if($id == true)
-            echo json_encode(array("id" => $id, "text" => $text));
-        else
-            echo 'Ошибка записи';
+        
+        if(isset($_GET['id'])){
+            $result = $model->update_data($_GET['id'], $_GET['text']);
+            if($result == false)
+                echo null;
+        }
+        else{
+            $result = $model->set_data($_GET['text'], "0", "NULL");
+            return $result;
+        }
     }
     else{
         $view = new View();

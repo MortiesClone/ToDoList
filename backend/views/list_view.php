@@ -9,7 +9,7 @@
 <div class="all">
     <input type="text" id="text" class="text">
     <input type="button" class="btn" onclick="add_textfield();" value="Добавить подзадачу">
-    <input type="button" class="btn" onclick="send();" value="Готово!">
+    <input type="button" class="btn" id="send" value="Готово!">
     <div id="inputs"></div>
     <div id="content">
         <?php

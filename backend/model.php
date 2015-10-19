@@ -18,13 +18,13 @@
             $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '".$done."', ".$parent.")");
             
             if($result == false)
-                return "Ошибка записи";
+                return null;
             else
                 return mysql_insert_id();
         }
         
-        function update_data(){
-                
+        function update_data($id, $text){
+            return mysql_query("UPDATE `list` SET `text`=".$text." WHERE `id`=".$id."");
         }
     }
 ?>
