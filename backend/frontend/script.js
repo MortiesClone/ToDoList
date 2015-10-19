@@ -8,7 +8,6 @@ $(document).ready(function(){
                 var a = "text=" + text;
             else
                 var a = "id=" + id + "&text=" + text;
-            alert(a);
             $.ajax({
                 type: "GET",
                 url: "controller.php",
@@ -16,7 +15,7 @@ $(document).ready(function(){
                 success: function(a) {
                     if(a == null) //обработка ошибок
                         alert("server eror");
-                    else
+                    else if(id == null)
                         $("#content").append("<div class=\"task\" data-id=" + a + "><span>" + text + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>")
                 }
             });
@@ -51,6 +50,7 @@ $(document).ready(function(){
             //Левая кнопка
             window.children("#left-btn").click(function(){
                 $("#message").css("display", "none");
+                send(span.parent().data("id"), text);
                 span.html("" + text);
             });
             

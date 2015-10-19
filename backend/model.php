@@ -24,7 +24,7 @@
         }
         
         function update_data($id, $text){
-            return mysql_query("UPDATE `list` SET `text`=".$text." WHERE `id`=".$id."");
+            return mysql_query("UPDATE `list` SET `text`='".$text."' WHERE `id`='".$id."'");
         }
     }
 ?>
