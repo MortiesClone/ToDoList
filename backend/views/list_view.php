@@ -1,9 +1,9 @@
 <div id="message" style="display: none;">
     <div class="shadow"></div>
     <div class="window">
-        <p>Сохранить?</p>
-        <input type="button" class="btn" value="Сохранить">
-        <input type="button" class="btn" value="Не сохронять">
+        <p></p>
+        <input type="button" id="left-btn" class="btn" value="">
+        <input type="button"  id="right-btn" class="btn" value="Отмена">
     </div>
 </div>
 <div class="all">
