@@ -24,9 +24,6 @@ p {
 }
 .btn {
     background-color: #fff;
-    border: 1px solid #B2BDCB;
-    border-radius: 3px;
-    padding: 3px
 }
 input[type=checkbox] {
     float: right;
