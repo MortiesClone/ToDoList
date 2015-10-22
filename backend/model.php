@@ -1,7 +1,7 @@
 <?php
     class Model{
-        function get_data($sql){
-            $result = mysql_query($sql);
+        function get_tasks(){
+            $result = mysql_query("SELECT * FROM `list`");
             $data = array();
             if($result == null){
                 $data = $result;
@@ -14,17 +14,21 @@
             return $data;
         }
         
-        function set_data($text, $done, $parent){
-            $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '".$done."', ".$parent.")");
+        function new_task($text){
+            $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '0', 'NULL')");
             
             if($result == false)
-                return null;
+                return $result;
             else
                 return mysql_insert_id();
         }
         
-        function update_data($id, $text){
+        function update_task($id, $text){
             return mysql_query("UPDATE `list` SET `text`='".$text."' WHERE `id`='".$id."'");
+        }
+        
+        function delete_data($id){
+            return mysql_query("DELETE FROM `list` WHERE 'id'=".$id);
         }
     }
 ?>

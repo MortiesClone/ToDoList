@@ -7,24 +7,27 @@ $application = new Application();
 
 $application->connect_to_db();
 
-    if(isset($_GET['text'])){
+    if(isset($_GET['action'])){
         $model = new Model();
-        
-        if(isset($_GET['id'])){
-            $result = $model->update_data($_GET['id'], $_GET['text']);
-            if($result == false)
-                echo null;
+
+        switch($_GET['action']){
+            case 'write':
+                $result = $model->new_task($_GET['text'], 0, NULL);
+                break;
+            case 'rewrite':
+                $result =$model->update_task($_GET['id'], $_GET['text']);
+                break;
+            case 'delete':
+                $result = $model->delete_task($_GET['id']);
+                break;
         }
-        else{
-            $result = $model->set_data($_GET['text'], "0", "NULL");
-            return $result;
-        }
+        echo $result;
     }
     else{
         $view = new View();
         $model = new Model();
         
-        $data = $model->get_data("SELECT * FROM `list`");
+        $data = $model->get_tasks();
         $view->generate('views/base_view.php','views/list_view.php', $data);
     }
 $application->close_connect();
