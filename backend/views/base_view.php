@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <?php if(FRONTEND == false):?>
+        <?php if(DEBUG == false):?>
             <script src="js/script.min.js"></script>
             <link rel="stylesheet" href="css/style.min.css">
         <?php else:?>
-            <script src="frontend/script.js"></script>
-            <link rel="stylesheet" href="frontend/style.css">
+            <script src="debug/script.js"></script>
+            <link rel="stylesheet" href="debug/style.css">
         <?php endif;?>
     </head>
     <body>

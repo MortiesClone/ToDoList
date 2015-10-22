@@ -6,5 +6,5 @@
     define('DB_NAME', 'list_data');
     
     //Frontend
-    define('FRONTEND', true);
+    define('DEBUG', true);
 ?>
