@@ -5,6 +5,6 @@
     define('PASSWORD', '');
     define('DB_NAME', 'list_data');
     
-    //Frontend
+    //Debug
     define('DEBUG', true);
 ?>
