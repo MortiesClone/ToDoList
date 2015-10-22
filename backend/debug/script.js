@@ -4,6 +4,7 @@ $(document).ready(function(){
     var activated = false;
     var span;
     var text;
+    var confirm_window = $(".window");            
     
     function send(id, text, action) {
         if(action == "write"){
@@ -33,6 +34,11 @@ $(document).ready(function(){
             }
         });
     }
+    function show_confrim_window(message, left_btn){
+        $("#message").css("display", "block");
+        confirm_window.children("p").html(message);
+        confirm_window.children("#left-btn").val(left_btn);
+    }
     function add_textfield(){
         $("#inputs").append("<input id=\"id" + count + "\" class=\"sub-item text\" type=\"text\">");
         count++;
@@ -49,38 +55,39 @@ $(document).ready(function(){
         }
         else
         {
-            var window = $(".window");
-            $("#message").css("display", "block");
-            window.children("p").html("Сохранить?");
-            window.children("#left-btn").val("Сохранить");
+            show_confrim_window("Сохранить?", "Сохранить");
             text = span.children().val();
-            //Левая кнопка
-            window.children("#left-btn").click(function(){
+            
+            //Left button
+            confirm_window.children("#left-btn").click(function(){
                 $("#message").css("display", "none");
                 send(span.parent().data("id"), text, "rewrite");
                 span.html("" + text);
             });
             
-            //Правая кнопка
-            window.children("#right-btn").click(function(){
+            //Right button
+            confirm_window.children("#right-btn").click(function(){
                 $("#message").css("display", "none");
                 span.html("" + text);
             });
+            
             activated = false;
         }
     });
     $(".glyphicon-remove").click(function(){
-        var window = $(".window");
         var task = $(this).parent();
-        $("#message").css("display", "block");
-        window.children("p").html("Удалить?");
-        window.children("#left-btn").val("Удалить");    
-        window.children("#left-btn").click(function(){
+        
+        show_confrim_window("Удалить?", "Удалить");
+        
+        //Left button
+        confirm_window.children("#left-btn").click(function(){
             send(task.data("id"), null, "delete");
             $("#message").css("display", "none");
             task.remove();
         });
-        window.children("#right-btn").click(function(){
+        
+        //Right button
+        confirm_window.children("#right-btn").click(function(){
             $("#message").css("display", "none");                                    
         });
     });
