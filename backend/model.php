@@ -27,8 +27,8 @@
             return mysql_query("UPDATE `list` SET `text`='".$text."' WHERE `id`='".$id."'");
         }
         
-        function delete_data($id){
-            return mysql_query("DELETE FROM `list` WHERE 'id'=".$id);
+        function delete_task($id){
+            return mysql_query("DELETE FROM `list` WHERE `id`=".$id);
         }
     }
 ?>

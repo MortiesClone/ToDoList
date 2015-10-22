@@ -13,7 +13,7 @@ $(document).ready(function(){
             var a = "action=" + action + "&id=" + id + "&text=" + text;
         }
         else if(action == "delete"){
-            var a = "action=" + action + "id=" + id;
+            var a = "action=" + action + "&id=" + id;
         }
         else {
             alert("Ошибка использования функции");
@@ -69,17 +69,19 @@ $(document).ready(function(){
             activated = false;
         }
     });
-//    $(".glyphicon-remove").click(fucntion(){
-//        var window = $(".window");
-//        var task = $(this).parent();
-//        $("#message").css("display", "block");
-//        window.children("p").html("Удалить?");
-//        window.children("#left-btn").val("Удалить");    
-//        window.children("#left-btn").click(fucntion(){
-//            send(task.data("id"), null, "delete");              
-//        });
-//        window.children("#right-btn").click(fucntion(){
-//            $("#message").css("display", "none");                                    
-//        });
-//    });
+    $(".glyphicon-remove").click(function(){
+        var window = $(".window");
+        var task = $(this).parent();
+        $("#message").css("display", "block");
+        window.children("p").html("Удалить?");
+        window.children("#left-btn").val("Удалить");    
+        window.children("#left-btn").click(function(){
+            send(task.data("id"), null, "delete");
+            $("#message").css("display", "none");
+            task.remove();
+        });
+        window.children("#right-btn").click(function(){
+            $("#message").css("display", "none");                                    
+        });
+    });
 });
