@@ -12,10 +12,13 @@ $application->connect_to_db();
 
         switch($_GET['action']){
             case 'write':
-                $result = $model->new_task($_GET['text'], 0, NULL);
+                if(isset($_GET['parent']))
+                    $result = $model->new_task($_GET['text'], $_GET['parent']);
+                else
+                    $result = $model->new_task($_GET['text'], null);
                 break;
             case 'rewrite':
-                $result =$model->update_task($_GET['id'], $_GET['text']);
+                $result = $model->update_task($_GET['id'], $_GET['text']);
                 break;
             case 'delete':
                 $result = $model->delete_task($_GET['id']);

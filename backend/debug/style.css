@@ -77,3 +77,10 @@ html {
     background-color: #000;
     opacity: .7
 }
+#sub-task{
+    float: none;
+}
+.sub-task{
+    margin-left: 20px;
+    margin-top: 7px;
+}

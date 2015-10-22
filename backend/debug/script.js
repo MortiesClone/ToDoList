@@ -5,10 +5,15 @@ $(document).ready(function(){
     var span;
     var text;
     var confirm_window = $(".window");            
+    var sub_task = $("#sub-task");
     
-    function send(id, text, action) {
+    function send(id, text, action, parent, parent_html) {
+        if (typeof parent_html == 'undefined') parent_html = null;
         if(action == "write"){
-            var a = "action=" + action + "&text=" + text;
+            if(parent == null)
+                var a = "action=" + action + "&text=" + text;
+            else
+                var a = "action=" + action + "&text=" + text + "&parent=" + parent;
         }
         else if(action == "rewrite"){
             var a = "action=" + action + "&id=" + id + "&text=" + text;
@@ -19,32 +24,46 @@ $(document).ready(function(){
         else {
             alert("Ошибка использования функции");
         }
-        if(text == ""){
-            alert("Ошибка");
-        }
         $.ajax({
             type: "GET",
             url: "controller.php",
             data: a,
             success: function(a) {
                 if(a == false) //обработка ошибок
-                    alert("Ошибка");
-                else if(action == "write")
-                    $("#content").append("<div class=\"task\" data-id=" + a + "><span>" + text + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>")
+                    alert("Ошибка записи");
+                else if(action == "write"){
+                    show_result(a, text, parent_html);
+                }
             }
         });
+    }
+    function show_result(id, task, parent){
+        if(parent == null){
+            $("#content").append("<div class=\"task\"><span data-id=" + id + ">" + task + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>");
+        }
+        else{
+            parent = parseInt(parent);
+            parent--;
+            $("#content").children(":eq(" + parent + ")").append("<div class=\"sub-task\ data-id=\"" + id + "\"><span>" + task + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>");
+        }    
     }
     function show_confrim_window(message, left_btn){
         $("#message").css("display", "block");
         confirm_window.children("p").html(message);
         confirm_window.children("#left-btn").val(left_btn);
     }
-    function add_textfield(){
-        $("#inputs").append("<input id=\"id" + count + "\" class=\"sub-item text\" type=\"text\">");
-        count++;
-    }
+    
+    //Click functions
+    
     $("#send").click(function(){
-        send(null, $("#text").val(), "write");                 
+        if(sub_task.prop("checked") == false){
+            send(null, $("#text").val(), "write", null);
+        }
+        else{
+            var parent = $("#number-of-sub-task option:selected").data("id");
+            var parent_html = $("#number-of-sub-task option:selected").val();
+            send(null, $("#text").val(), "write", parent, parent_html);
+        }
     });
     $(".glyphicon-pencil").click(function(){
         if(!activated){

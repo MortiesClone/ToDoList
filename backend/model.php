@@ -14,8 +14,11 @@
             return $data;
         }
         
-        function new_task($text){
-            $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '0', 'NULL')");
+        function new_task($text, $parent){
+            if($parent == null)
+                $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '0', NULL)");
+            else
+                $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '0', '".$parent."')");
             
             if($result == false)
                 return $result;
