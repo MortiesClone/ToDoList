@@ -5,14 +5,17 @@
 
 $application = new Application();
 
-$application->connect_to_db();
-
-    if(isset($_GET['action'])){
+$connect = $application->connect_to_db();
+if($connect == null) {
+    echo 'Ошибка подключения к бд';
+}
+else {
+    if (isset($_GET['action'])) {
         $model = new Model();
 
-        switch($_GET['action']){
+        switch ($_GET['action']) {
             case 'write':
-                if(isset($_GET['parent']))
+                if (isset($_GET['parent']))
                     $result = $model->new_task($_GET['text'], $_GET['parent']);
                 else
                     $result = $model->new_task($_GET['text'], null);
@@ -25,13 +28,13 @@ $application->connect_to_db();
                 break;
         }
         echo $result;
-    }
-    else{
+    } else {
         $view = new View();
         $model = new Model();
-        
-        $data = $model->get_tasks();
-        $view->generate('views/base_view.php','views/list_view.php', $data);
+
+        $data = $model->get_tasks($connect);
+        $view->generate('views/base_view.php', 'views/list_view.php', $data);
     }
-$application->close_connect();
+    $application->close_connect();
+}
 ?>

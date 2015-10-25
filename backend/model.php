@@ -1,20 +1,12 @@
 <?php
     class Model{
-        function get_tasks(){
-            $result = mysql_query("SELECT * FROM `list`");
-            $data = array();
-            if($result == null){
-                $data = $result;
-            }
-            else{
-                while($row = mysql_fetch_array($result)){
-                    $data[$row['id']] = $row['text'];
-                }
-            }
-            return $data;
+        function get_tasks($connect){
+            $result = $connect->query("SELECT * FROM `list`");
+            $rows = $result->fetchAll(PDO::FETCH_OBJ);
+            return $rows;
         }
         
-        function new_task($text, $parent){
+        function new_task($connect, $text, $parent){
             if($parent == null)
                 $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '0', NULL)");
             else
@@ -26,7 +18,7 @@
                 return mysql_insert_id();
         }
         
-        function update_task($id, $text){
+        function update_task($connect, $id, $text){
             return mysql_query("UPDATE `list` SET `text`='".$text."' WHERE `id`='".$id."'");
         }
         

@@ -24,12 +24,19 @@
     <div id="inputs"></div>
     <div id="content">
         <?php
-            if($data == null)
-                echo '<p>список пуст</p>';
-            else
-                foreach($data as $key => $value){
-                    echo '<div class="task" data-id="'.$key.'"><span>'.$value.'</span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span></div>';
+        $stop = false;
+        foreach($data as $row){
+            if($stop == false)
+                echo '<div class="task" data-id="'.$row->id.'"><span>'.$row->text.'</span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span></div>';
+            foreach($data as $parent) {
+                if ($parent->parent == $row->id) {
+                    echo '<div class="sub-task" data-id="' . $parent->id . '"><span>' . $parent->text . '</span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span></div>';
+                    $stop = true;
                 }
+                else
+                    $stop = false;
+            }
+        }
         ?>
     </div>
 </div>
