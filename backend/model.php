@@ -7,23 +7,32 @@
         }
         
         function new_task($connect, $text, $parent){
-            if($parent == null)
-                $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '0', NULL)");
-            else
-                $result = mysql_query("INSERT INTO `list_data`.`list` (`id`, `text`, `done`, `parent`) VALUES (NULL, '".$text."', '0', '".$parent."')");
-            
+            $sql = $connect->prepare("INSERT INTO list VALUES (NULL, :text, '0', :parent)");
+            $result = $sql->execute(array(
+                ':text' => $text,
+                ':parent' => $parent
+            ));
             if($result == false)
                 return $result;
             else
-                return mysql_insert_id();
+                return $connect->lastInsertId();
         }
         
         function update_task($connect, $id, $text){
-            return mysql_query("UPDATE `list` SET `text`='".$text."' WHERE `id`='".$id."'");
+            $sql = $connect->prepare("UPDATE list SET text = :text WHERE id = :id");
+            $result = $sql->execute(array(
+                ':text' => $text,
+                ':id' => $id
+            ));
+            return $result;
         }
         
-        function delete_task($id){
-            return mysql_query("DELETE FROM `list` WHERE `id`=".$id);
+        function delete_task($connect, $id){
+            $sql = $connect->prepare("DELETE FROM list WHERE id = :id");
+            $result = $sql->execute(array(
+                ':id' => $id
+            ));
+            return $result;
         }
     }
 ?>

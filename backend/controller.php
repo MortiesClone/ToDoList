@@ -16,15 +16,15 @@ else {
         switch ($_GET['action']) {
             case 'write':
                 if (isset($_GET['parent']))
-                    $result = $model->new_task($_GET['text'], $_GET['parent']);
+                    $result = $model->new_task($connect, $_GET['text'], $_GET['parent']);
                 else
-                    $result = $model->new_task($_GET['text'], null);
+                    $result = $model->new_task($connect, $_GET['text'], null);
                 break;
             case 'rewrite':
-                $result = $model->update_task($_GET['id'], $_GET['text']);
+                $result = $model->update_task($connect, $_GET['id'], $_GET['text']);
                 break;
             case 'delete':
-                $result = $model->delete_task($_GET['id']);
+                $result = $model->delete_task($connect, $_GET['id']);
                 break;
         }
         echo $result;
