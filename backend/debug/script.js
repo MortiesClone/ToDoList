@@ -10,28 +10,31 @@ $(document).ready(function(){
     var edit;
     
     reseach();
+    click();
     
     function send(id, text, action, parent, parent_html) {
         if (typeof parent_html == 'undefined') parent_html = null;
-        if(action == "write"){
-            if(parent == null)
-                var a = "action=" + action + "&text=" + text;
-            else
-                var a = "action=" + action + "&text=" + text + "&parent=" + parent;
-        }
-        else if(action == "rewrite"){
-            var a = "action=" + action + "&id=" + id + "&text=" + text;
-        }
-        else if(action == "delete"){
-            var a = "action=" + action + "&id=" + id;
-        }
-        else {
-            alert("Ошибка использования функции");
-        }
+        //if(action == "write"){
+        //    if(parent == null)
+        //        var a = "action=" + action + "&text=" + text;
+        //    else
+        //        var a = "action=" + action + "&text=" + text + "&parent=" + parent;
+        //}
+        //else if(action == "rewrite"){
+        //    var a = "action=" + action + "&id=" + id + "&text=" + text;
+        //}
+        //else if(action == "delete") {
+        //    var a = "action=" + action + "&id=" + id;
+        //}
         $.ajax({
             type: "GET",
             url: "controller.php",
-            data: a,
+            data: {
+                "id":id,
+                "text":text,
+                "action":action,
+                "parent":parent
+            },
             success: function(a) {
                 if(a == false) //обработка ошибок
                     alert("Ошибка записи");
@@ -39,17 +42,18 @@ $(document).ready(function(){
                     show_result(a, text, parent_html);
                 }
                 reseach();
+                click();
             }
         });
     }
     function show_result(id, task, parent){
         if(parent == null){
-            $("#content").append("<div class=\"task\"><span data-id=" + id + ">" + task + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>");
+            $("#content").append("<div class=\"task\"><span data-id=" + id + ">" + escapeHtml(task) + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>");
         }
         else{
             parent = parseInt(parent);
             parent--;
-            $("#content").children(":eq(" + parent + ")").append("<div class=\"sub-task\ data-id=\"" + id + "\"><span>" + task + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>");
+            $("#content").children(":eq(" + parent + ")").append("<div class=\"sub-task\ data-id=\"" + id + "\"><span>" + escapeHtml(task) + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>");
         }    
     }
     function show_confrim_window(message, left_btn){
@@ -60,6 +64,11 @@ $(document).ready(function(){
     function reseach(){
         remove = $(".glyphicon-remove");
         edit = $(".glyphicon-pencil");
+    }
+    function escapeHtml(text) {
+        return text
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
     }
     
     //Click functions
@@ -75,36 +84,37 @@ $(document).ready(function(){
         }
     });
     //edit
-    edit.click(function(){
-        if(!activated){
-            span = $(this).parent().children().first();
-            text = span.text();
-            span.html("<input type=\"text\" value=\"" + text + "\">");
-            activated = true;
-        }
-        else
-        {
-            show_confrim_window("Сохранить?", "Сохранить");
-            text = span.children().val();
-            
-            //Left button
-            confirm_window.children("#left-btn").click(function(){
-                $("#message").css("display", "none");
-                send(span.parent().data("id"), text, "rewrite");
-                span.html("" + text);
-            });
-            
-            //Right button
-            confirm_window.children("#right-btn").click(function(){
-                $("#message").css("display", "none");
-                span.html("" + text);
-            });
-            
-            activated = false;
-        }
-    });
-    //delete
-    remove.click(function(){
+    function click(){
+        edit.click(function(){
+            if(!activated){
+                span = $(this).parent().children().first();
+                text = span.text();
+                span.html("<input type=\"text\" value=\"" + text + "\">");
+                activated = true;
+            }
+            else
+            {
+                show_confrim_window("Сохранить?", "Сохранить");
+                text = span.children().val();
+
+                //Left button
+                confirm_window.children("#left-btn").click(function(){
+                    $("#message").css("display", "none");
+                    send(span.parent().data("id"), text, "rewrite");
+                    span.html("" + text);
+                });
+
+                //Right button
+                confirm_window.children("#right-btn").click(function(){
+                    $("#message").css("display", "none");
+                    span.html("" + text);
+                });
+
+                activated = false;
+            }
+        });
+        //delete
+        remove.click(function(){
         var task = $(this).parent();
         
         show_confrim_window("Удалить?", "Удалить");
@@ -121,4 +131,5 @@ $(document).ready(function(){
             $("#message").css("display", "none");                                    
         });
     });
+    }
 });

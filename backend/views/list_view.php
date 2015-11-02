@@ -1,4 +1,5 @@
-<?php $count = 1;?>
+<?php
+$count = 1;?>
 <div id="message" style="display: none;">
     <div class="shadow"></div>
     <div class="window">
@@ -26,11 +27,11 @@
         <?php
         $a_lenght = count($data);
         for($i = 0; $i < $a_lenght; $i++){
-                echo '<div class="task" data-id="'.$data[$i]->id.'"><span>'.$data[$i]->text.'</span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span></div>';
+                echo '<div class="task" data-id="'.$data[$i]->id.'"><span>'.htmlspecialchars($data[$i]->text).'</span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span></div>';
                 $id = $data[$i]->id;
             foreach($data as $row) {
                 if ($row->parent == $id) {
-                    echo '<div class="sub-task" data-id="' . $row->id . '"><span>' . $row->text . '</span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span></div>';
+                    echo '<div class="sub-task" data-id="'.$row->id.'"><span>'.htmlspecialchars($row->text).'</span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span></div>';
                     $i++;
                 }
             }

@@ -7,7 +7,7 @@ $application = new Application();
 
 $connect = $application->connect_to_db();
 if($connect == null) {
-    echo 'Ошибка подключения к бд';
+    echo 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ';
 }
 else {
     if (isset($_GET['action'])) {
@@ -15,7 +15,7 @@ else {
 
         switch ($_GET['action']) {
             case 'write':
-                if (isset($_GET['parent']))
+                if ($_GET['parent'] != null)
                     $result = $model->new_task($connect, $_GET['text'], $_GET['parent']);
                 else
                     $result = $model->new_task($connect, $_GET['text'], null);
