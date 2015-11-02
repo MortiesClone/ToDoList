@@ -6,6 +6,10 @@ $(document).ready(function(){
     var text;
     var confirm_window = $(".window");            
     var sub_task = $("#sub-task");
+    var remove;
+    var edit;
+    
+    reseach();
     
     function send(id, text, action, parent, parent_html) {
         if (typeof parent_html == 'undefined') parent_html = null;
@@ -34,6 +38,7 @@ $(document).ready(function(){
                 else if(action == "write"){
                     show_result(a, text, parent_html);
                 }
+                reseach();
             }
         });
     }
@@ -52,6 +57,10 @@ $(document).ready(function(){
         confirm_window.children("p").html(message);
         confirm_window.children("#left-btn").val(left_btn);
     }
+    function reseach(){
+        remove = $(".glyphicon-remove");
+        edit = $(".glyphicon-pencil");
+    }
     
     //Click functions
     
@@ -65,7 +74,8 @@ $(document).ready(function(){
             send(null, $("#text").val(), "write", parent, parent_html);
         }
     });
-    $(".glyphicon-pencil").click(function(){
+    //edit
+    edit.click(function(){
         if(!activated){
             span = $(this).parent().children().first();
             text = span.text();
@@ -93,7 +103,8 @@ $(document).ready(function(){
             activated = false;
         }
     });
-    $(".glyphicon-remove").click(function(){
+    //delete
+    remove.click(function(){
         var task = $(this).parent();
         
         show_confrim_window("Удалить?", "Удалить");
