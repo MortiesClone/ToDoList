@@ -14,18 +14,6 @@ $(document).ready(function(){
     
     function send(id, text, action, parent, parent_html) {
         if (typeof parent_html == 'undefined') parent_html = null;
-        //if(action == "write"){
-        //    if(parent == null)
-        //        var a = "action=" + action + "&text=" + text;
-        //    else
-        //        var a = "action=" + action + "&text=" + text + "&parent=" + parent;
-        //}
-        //else if(action == "rewrite"){
-        //    var a = "action=" + action + "&id=" + id + "&text=" + text;
-        //}
-        //else if(action == "delete") {
-        //    var a = "action=" + action + "&id=" + id;
-        //}
         $.ajax({
             type: "GET",
             url: "controller.php",
@@ -36,10 +24,11 @@ $(document).ready(function(){
                 "parent":parent
             },
             success: function(a) {
-                if(a == false) //обработка ошибок
+                a = JSON.parse(a);
+                if(a['status'] == false) //обработка ошибок
                     alert("Ошибка записи");
                 else if(action == "write"){
-                    show_result(a, text, parent_html);
+                    show_result(a['data'], text, parent_html);
                 }
                 reseach();
                 click();
@@ -48,7 +37,7 @@ $(document).ready(function(){
     }
     function show_result(id, task, parent){
         if(parent == null){
-            $("#content").append("<div class=\"task\"><span data-id=" + id + ">" + escapeHtml(task) + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>");
+            $("#content").append("<div class=\"task\" data-id=\"" + id + "\"><span>" + escapeHtml(task) + "</span><span class=\"glyphicon glyphicon-remove\"></span><span class=\"glyphicon glyphicon-pencil\"></span></div>");
         }
         else{
             parent = parseInt(parent);

@@ -2,8 +2,13 @@
     class Model{
         function get_tasks($connect){
             $result = $connect->query("SELECT * FROM `list`");
-            $rows = $result->fetchAll(PDO::FETCH_OBJ);
-            return $rows;
+            if($result != false) {
+                $rows = $result->fetchAll(PDO::FETCH_OBJ);
+                return $rows;
+            }
+            else{
+                return $result;
+            }
         }
         
         function new_task($connect, $text, $parent){
