@@ -26,7 +26,7 @@ $(document).ready(function(){
             success: function(a) {
                 a = JSON.parse(a);
                 if(a['status'] == false) //обработка ошибок
-                    alert("Ошибка записи");
+                    alert(a['error']);
                 else if(action == "write"){
                     show_result(a['data'], text, parent_html);
                 }
