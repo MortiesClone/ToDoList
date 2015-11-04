@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once 'data/config.php';
 class Application {
     function connect_to_db(){
         global $connection;

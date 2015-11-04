@@ -1,8 +1,8 @@
 <?php
-    require_once 'view.php';
-    require_once 'model.php';
-    require_once 'application.php';
-    require_once 'processing_errors.php';
+    require_once 'core/view.php';
+    require_once 'core/model.php';
+    require_once 'core/application.php';
+    require_once 'core/Errors.php';
 
 $application = new Application();
 

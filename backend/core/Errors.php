@@ -1,5 +1,5 @@
 <?php
-    $errors = include 'errors.php';
+    $errors = include 'data/errors.php';
     class Errors{
         public static function get_error($status, $type){
             if(!$status) {
